@@ -1,5 +1,5 @@
 #include "Cell.h"
-#include "Piece.h"
+#include "Block.h"
 #include "Board.h"
 #include "Game.h"
 
