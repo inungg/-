@@ -5,11 +5,6 @@
       this->y = y;
       this->type = type;
    }
-    Point::Point(int newX,int newY,char newType){
-        x=newX;
-        y=newY;
-        type=newType;
-    }
     int Point::getX()const{
         return x;
     }
