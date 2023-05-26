@@ -17,7 +17,7 @@ Block::Block(Point pos)
         else if(type==Block_s)
             body={pos,pos.shiftCopy(-1,0),pos.shiftCopy(0,1),pos.shiftCopy(1,1)};
         else if(type==Block_z)
-            body={pos,pos.shiftCopy(1.0),pos.shiftCopy(0,1),pos.shiftCopy(-1,1)};
+            body={pos,pos.shiftCopy(1,0),pos.shiftCopy(0,1),pos.shiftCopy(-1,1)};
 
 }
     void Block::fallDown(){
