@@ -1,10 +1,10 @@
    #include"Point.h"
 
-    Point:: Point(){
-        x=0;
-        y=0;
-        type=' ';
-    } 
+    Point::Point(int x, int y, char type) {
+      this->x = x;
+      this->y = y;
+      this->type = type;
+   }
     Point::Point(int newX,int newY,char newType){
         x=newX;
         y=newY;
