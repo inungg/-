@@ -1,5 +1,5 @@
 #include "Block.h"
-
+using namespace std;
 Block::Block(Point pos)
     :pos{pos} {
         srand(time(0));
