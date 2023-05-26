@@ -8,8 +8,7 @@ private:
     char type;
 
 public:
-    Point(int newX,int newY,char newType);
-    Point();
+    Point(int x = 0, int y = 0, char type = ' ');
     int getX()const;
     int getY()const;
     char getType()const;
