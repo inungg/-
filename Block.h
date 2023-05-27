@@ -4,7 +4,6 @@
 #include<vector>
 #include <stdlib.h>
 #include<time.h>
-using namespace std;
 
 enum BlockType{
     Block_t,
