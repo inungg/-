@@ -17,7 +17,7 @@
     void Point::setType(char newType){
         type=newType;
     }
-    Point Point::shiftCopy(int shiftX,int shiftY){
+    Point Point::shiftCopy(int shiftX,int shiftY)const{
         return Point(x+shiftX,y+shiftY,type);
     }
     void Point::move(int moveX,int moveY){
