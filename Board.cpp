@@ -1,4 +1,5 @@
 #include "Board.h"
+#include "Point.h"
 
 Board::Board(int width, int height)
     :width{ width }, height{ height } {
