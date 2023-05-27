@@ -129,7 +129,7 @@ void Game::draw() {
                 if (it->getType() == '#')
                     std::cout << "*";
                 else if (it->getType() == 'O')
-                    std::cout << "▂";
+                    std::cout << "0";
                 else
                     std::cout << " ";
             }
