@@ -1,4 +1,6 @@
 #include "Block.h"
+#include "Point.h"
+
 using namespace std;
 Block::Block(Point pos)
     :pos{pos} {
