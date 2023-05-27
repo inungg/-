@@ -3,8 +3,10 @@
 #include "Block.h"
 #include "Board.h"
 #include "Game.h"
-using namespace std;
 
-int main(){
- 
+int main() {
+
+    Game start_game;
+
+    return 0;
 }
