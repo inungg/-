@@ -22,13 +22,13 @@ void Game::controls() {
         checkedMove(right);
     else if (GetAsyncKeyState(VK_LEFT))
         checkedMove(left);
-    else if (GetAsyncKeyState('P')) {
-        //run = gameOver();
+    else if (GetAsyncKeyState(VK_ESCAPE)) {
+        run = false;
     }
 }
 
 void Game::running() {
-    while (!gameOver()) {
+    while (!gameOver() && run) {
         currBlock = Block(Point((board.getWidth() - 1) / 2, board.getHeight(), 'O'));
         while (!hitBuiltPointsDown()) {
             speed = 500;
@@ -39,12 +39,15 @@ void Game::running() {
             refreshFinalPoints();
             draw();
             controls();
-            Sleep(speed);
 
+            if (!run) {
+                break;  // 退出游戏循环
+            }
+
+            Sleep(speed);
         }
     }
 }
-
 bool Game::hitBuiltPointsDown() {
 
     for (const auto& nextBlockPnt : currBlock.nextFallDownBody()) {
@@ -79,10 +82,17 @@ bool Game::regame() {
     bool isvalid{ false };
     do {
         std::cin >> c;
-        if (c == 'y')
+        if (c == 'y') {
+            // 重新初始化游戏状态
+            score = 0;
+            speed = 200;
+            run = true;
             return true;
-        else if (c == 'n')
+        }
+        else if (c == 'n') {
+            // 设置退出游戏标志或其他逻辑
             return false;
+        }
         else {
             std::cout << "invalid entry\n";
             isvalid = true;
