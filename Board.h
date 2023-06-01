@@ -19,11 +19,12 @@ public:
     std::vector<Point> getAllPoints();
     std::vector<Point> getBuiltPoints();
     void setBuiltPoints(std::vector<Point> builtPoints);
+    
     void setBorder();
-
+    void refresh();
     void insertToBuiltPoints(std::vector<Point> insertPoints);
     int removeRow();
-    void refresh();
+    
 
 };
 
