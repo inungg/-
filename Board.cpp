@@ -28,7 +28,6 @@ std::vector<Point> Board::getBuiltPoints() {
 void Board::setBuiltPoints(std::vector<Point> builtPoints) { 
     this->builtPoints = builtPoints; 
 }
-
 void Board::refresh() {
     setBorder();
     for (auto& allPnt : allPoints)
@@ -40,7 +39,7 @@ void Board::refresh() {
 void Board::setBorder() {
     for (auto& point : allPoints) {
         if (point.getX() == 0 || point.getY() == 0 || point.getX() == width - 1 || point.getY() == height - 1)
-            point.setType('#');
+            point.setType('*');
         else
             point.setType(' ');
     }
