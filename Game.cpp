@@ -135,11 +135,17 @@ void Game::draw() {
                 return c.getX() == j && c.getY() == i;
                 });
 
+            
             if (it != finalPoints.end()) {
-                if (it->getType() == '#')
+                if (it->getType() == '*') {
                     std::cout << "*";
-                else if (it->getType() == 'O')
-                    std::cout << "0";
+                }
+                else if (it->getType() == 'O') {
+                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), it->getColor());
+                std::cout << "0";
+                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+
+            }
                 else
                     std::cout << " ";
             }
@@ -149,7 +155,10 @@ void Game::draw() {
         }
         std::cout << std::endl;
     }
+
+
     std::cout << "\nScore = " << score << std::endl;
+    
 }
 
 void Game::refreshFinalPoints() {
