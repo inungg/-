@@ -12,7 +12,7 @@ private:
     std::vector<Point> allPoints;
     std::vector<Point> builtPoints;
 public:
-    Board(int width=30, int height=30);
+    Board(int width=20, int height=20);
 
     int getWidth();
     int getHeight();
