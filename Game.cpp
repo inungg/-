@@ -6,7 +6,7 @@ Game::Game(){
     run = true;
 
     do {
-        system("cls");
+        system("cls");//清空控制台屏幕，用于刷新游戏界面
         board = Board(20, 20);
         running();
     } while (regame());
@@ -29,8 +29,8 @@ void Game::controls() {
 
 void Game::running() {
     while (!gameOver() && run) {
-        currBlock = Block(Point((board.getWidth() - 1) / 2, board.getHeight(), 'O'));
-        while (!hitBuiltPointsDown()) {
+        currBlock = Block(Point((board.getWidth() - 1) / 2, board.getHeight(), 'O'));//设置在游戏板中间的顶部位置
+        while (!hitBuiltPointsDown()) {//当当前方块未触底时
             speed = 500;
             ClearScreen();
             currBlock.fallDown();
@@ -44,22 +44,22 @@ void Game::running() {
                 break;  // 退出游戏循环
             }
 
-            Sleep(speed);
+            Sleep(speed);//根据设定的速度暂停一段时间，控制方块下落的速度。
         }
     }
 }
 bool Game::hitBuiltPointsDown() {
 
-    for (const auto& nextBlockPnt : currBlock.nextFallDownBody()) {
+    for (const auto& nextBlockPnt : currBlock.nextFallDownBody()) {//对于当前方块下一次下落的每个点，进行迭代循环。
         //hit the ground
-        if (nextBlockPnt.getY() == 0) {
-            board.insertToBuiltPoints(currBlock.getBody());
+        if (nextBlockPnt.getY() == 0) {//到达底部边界。
+            board.insertToBuiltPoints(currBlock.getBody());//插入到已建立的方块集合中。
             return true;
         }
         //hit built points
-        for (const auto& builtPnt : board.getBuiltPoints())
-            if (nextBlockPnt == builtPnt) {
-                board.insertToBuiltPoints(currBlock.getBody());
+        for (const auto& builtPnt : board.getBuiltPoints())//进行迭代循环。
+            if (nextBlockPnt == builtPnt) {//如果重合。
+                board.insertToBuiltPoints(currBlock.getBody());//将当前方块的所有点插入到已建立的方块集合中。
                 return true;
             }
     }
@@ -68,8 +68,8 @@ bool Game::hitBuiltPointsDown() {
 }
 
 bool Game::gameOver() {
-    for (const auto& pnt : board.getBuiltPoints())
-        if (pnt.getY() >= board.getHeight() - 2) {
+    for (const auto& pnt : board.getBuiltPoints())//对于已建立的方块集合中的每个点，进行迭代循环。
+        if (pnt.getY() >= board.getHeight() - 2) {//判断当前点的Y坐标是否大于等于游戏板的高度减去边框2.
             return true;
         }
     return false;
@@ -85,7 +85,7 @@ bool Game::regame() {
         if (c == 'y') {
             // 重新初始化游戏状态
             score = 0;
-            speed = 200;
+            speed = 500;
             run = true;
             return true;
         }
@@ -102,10 +102,10 @@ bool Game::regame() {
 
 bool Game::checkedMove(enum move_direction dir) {
     for (const auto& nextBlockPnt : currBlock.nextMoveBody(dir)) {
-        if (nextBlockPnt.getX() == 0 || nextBlockPnt.getX() == (board.getWidth() - 1))
+        if (nextBlockPnt.getX() == 0 || nextBlockPnt.getX() == (board.getWidth() - 1))//判断左边界或右边界。
             return false;
 
-        for (const auto& builtPnt : board.getBuiltPoints())
+        for (const auto& builtPnt : board.getBuiltPoints())//检查当前点是否与已建立的方块集合中的任何一个点重合。
             if (builtPnt == nextBlockPnt)
                 return false;
     }
@@ -117,16 +117,17 @@ bool Game::checkedMove(enum move_direction dir) {
 bool Game::checkedRotate() {
     for (const auto& nextBlockPnt : currBlock.nextRotateBody()) {
         if (nextBlockPnt.getX() == 0 || nextBlockPnt.getX() == (board.getWidth() - 1))
-            return false;
+            return false;  // 如果旋转后的方块超出了游戏板的左边界或右边界，则返回false表示无法旋转
 
         for (const auto& builtPnt : board.getBuiltPoints())
             if (builtPnt == nextBlockPnt)
-                return false;
+                return false;  // 如果旋转后的方块与已建立的方块集合中的任何一个点重叠，则返回false表示无法旋转
     }
 
-    currBlock.rotate();
-    return true;
+    currBlock.rotate();  // 若旋转没有冲突，则进行方块的旋转操作
+    return true;  // 返回true表示旋转成功
 }
+
 
 void Game::draw() {
     for (int i = board.getHeight() - 1; i >= 0; i--) {
@@ -163,14 +164,15 @@ void Game::draw() {
 
 void Game::refreshFinalPoints() {
 
-    finalPoints = board.getAllPoints();
-    for (auto& finalPnt : finalPoints)
-        for (auto blockPnt : currBlock.getBody())
-            if (finalPnt == blockPnt)
-                finalPnt = blockPnt;
+    finalPoints = board.getAllPoints(); // 获取游戏板上的所有点，包括已建立的方块和当前方块
+    for (auto& finalPnt : finalPoints)// 对于每一个游戏板上的点
+        for (auto blockPnt : currBlock.getBody()) // 对于当前方块的每一个点
+            if (finalPnt == blockPnt)// 如果游戏板上的点与当前方块的某个点重合
+                finalPnt = blockPnt;// 更新游戏板上的点为当前方块的点
 }
 
 void Game::ClearScreen() {
     // Function which cleans the screen without flickering
-    COORD cursorPosition;   cursorPosition.X = 0;   cursorPosition.Y = 0;   SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursorPosition);
+    COORD cursorPosition;   cursorPosition.X = 0;   cursorPosition.Y = 0;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursorPosition);
 }
