@@ -4,7 +4,7 @@ Board::Board(int width, int height)
     :width{ width }, height{ height } {
     for (int i{ 0 }; i < width; i++)
         for (int j{ 0 }; j < height; j++)
-            allPoints.push_back(Point(i, j));
+            allPoints.push_back(Point(i, j));//创建所有Points(i,j)的集合 allPoints
 
     setBorder();
 }
@@ -28,13 +28,6 @@ std::vector<Point> Board::getBuiltPoints() {
 void Board::setBuiltPoints(std::vector<Point> builtPoints) { 
     this->builtPoints = builtPoints; 
 }
-void Board::refresh() {
-    setBorder();
-    for (auto& allPnt : allPoints)
-        for (auto builtPnt : builtPoints)
-            if (allPnt == builtPnt)
-                allPnt = builtPnt;    //seting the char of all_pnt to built pnt
-}
 
 void Board::setBorder() {
     for (auto& point : allPoints) {
@@ -43,6 +36,14 @@ void Board::setBorder() {
         else
             point.setType(' ');
     }
+}
+
+void Board::refresh() {
+    setBorder();
+    for (auto& allPnt : allPoints)
+        for (auto builtPnt : builtPoints)
+            if (allPnt == builtPnt)
+                allPnt = builtPnt;    //seting the char of all_pnt to built pnt
 }
 
 void Board::insertToBuiltPoints(std::vector<Point> insertPoints) {
