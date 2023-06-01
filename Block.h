@@ -1,11 +1,12 @@
 #ifndef BLOCK_H
 #define BLOCK_H
-#include"Point.h"
-#include<vector>
+
+#include "Point.h"
+#include <vector>
 #include <stdlib.h>
-#include<time.h>
-using namespace std;
-enum BlockType{
+#include <time.h>
+
+enum block_type {
     Block_t,
     Block_i,
     Block_o,
@@ -15,27 +16,31 @@ enum BlockType{
     Block_z
 };
 
-enum moveDirection{
-    right=1,left=-1
+enum move_direction {
+    right = 1,
+    left = -1
 };
 
-class Block{
+class Block {
 private:
-    enum BlockType type;
-    vector<Point> body;
+    enum block_type type;
+    std::vector<Point> body;
     Point pos;
 
+
 public:
-    Block()=default;
+    Block() = default;
     Block(Point pos);
     void fallDown();
-    vector<Point> nextFallDownBody();
-    void move(enum moveDirection dir);
-    vector<Point> nextMoveBody(enum moveDirection dir);
+    std::vector<Point> nextFallDownBody();
+    void move(enum move_direction dir);
+    std::vector<Point> nextMoveBody(enum move_direction dir);
     void rotate();
-    vector<Point> nextRotateBody();
-    vector<Point>getBody(){return body;}
-    void setBody(vector<Point> body){this->body=body;}
+    std::vector<Point> nextRotateBody();
+
+    std::vector<Point> getBody() { return body; }
+    void setBody(std::vector<Point> body) { this->body = body; }
+
 };
 
 #endif
